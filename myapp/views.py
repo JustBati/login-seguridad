@@ -14,9 +14,9 @@ def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            username = form.cleaned_data.get('Nombre')
+            password = form.cleaned_data.get('Contraseña')
+            user = authenticate(Nombre=Nombre, Contraseña=Contraseña)
             if user is not None:
                 login(request, user)
                 # Redirige a la página principal o a donde prefieras después del inicio de sesión
@@ -41,9 +41,7 @@ def main_page_view(request):
             form = MaquinaForm(request.POST)
             if form.is_valid():
                 form.save()
-                # Si quieres que la página se recargue tras añadir la máquina:
                 form = MaquinaForm()  # Reinicia el formulario para que esté limpio después del POST
-            # Si el formulario no es válido, se pasará con los errores al template
         else:
             form = MaquinaForm()
 
