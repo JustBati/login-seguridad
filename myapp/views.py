@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Maquina, Prestamo
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_Contraseña
 from .forms import MaquinaForm
 from django.utils import timezone
 
@@ -16,8 +16,8 @@ def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('Nombre')
-            password = form.cleaned_data.get('Contraseña')
+            Nombre = form.cleaned_data.get('Nombre')
+            Contraseña = form.cleaned_data.get('Contraseña')
             user = authenticate(Nombre=Nombre, Contraseña=Contraseña)
             if user is not None:
                 login(request, user)
@@ -117,7 +117,7 @@ def loan_machine(request):
 @login_required
 def get_loans(request):
     loans = Prestamo.objects.all().values(
-        'id', 'usuario__username', 'maquina__tipo', 'maquina__marca', 
+        'id', 'usuario__Nombre', 'maquina__tipo', 'maquina__marca', 
         'maquina__modelo', 'fecha_prestamo', 'fecha_devolucion'
     )
     return JsonResponse(list(loans), safe=False)
