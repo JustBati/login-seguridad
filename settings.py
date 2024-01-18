@@ -76,9 +76,9 @@ WSGI_APPLICATION = 'login_seguridad.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'root',  # Nombre de tu base de datos
-        'USER': '12345',  # Tu usuario de MariaDB
-        'PASSWORD': '',  # La contraseña de tu usuario de MariaDB
+        'NAME': 'DB',  # Nombre de tu base de datos
+        'USER': 'root',  # Tu usuario de MariaDB
+        'PASSWORD': '12345',  # La contraseña de tu usuario de MariaDB
         'HOST': 'localhost',  # O la dirección de tu servidor de MariaDB si no es local
         'PORT': '3306',  # Puerto predeterminado de MariaDB/MySQL
     }
