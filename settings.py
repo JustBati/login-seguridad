@@ -122,3 +122,17 @@ STATICFILES_DIRS = [BASE_DIR / 'LOGIN-SEGURIDAD/static']
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'BD',  # Nombre de tu base de datos
+        'USER': '',  # Tu usuario de MariaDB
+        'PASSWORD': '',  # La contraseña de tu usuario de MariaDB
+        'HOST': 'localhost',  # O la dirección de tu servidor de MariaDB si no es local
+        'PORT': '3306',  # Puerto predeterminado de MariaDB/MySQL
+    }
+}
+
