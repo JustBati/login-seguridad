@@ -6,10 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Maquina, Prestamo
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth.hashers import make_Contraseña
 from .forms import MaquinaForm
 from django.utils import timezone
-
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.hashers import make_password
 
 
 def login_view(request):
