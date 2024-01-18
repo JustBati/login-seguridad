@@ -8,6 +8,8 @@ from .models import Maquina, Prestamo
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.hashers import make_password
 from .forms import MaquinaForm
+from django.utils import timezone
+
 
 
 def login_view(request):
@@ -20,7 +22,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 # Redirige a la página principal o a donde prefieras después del inicio de sesión
-                return redirect(reverse('nombre_de_tu_vista_principal'))
+                return redirect(reverse('main_page'))
         else:
             # Manejar el caso de un formulario no válido
             return render(request, 'login.html', {'form': form})
@@ -41,7 +43,9 @@ def main_page_view(request):
             form = MaquinaForm(request.POST)
             if form.is_valid():
                 form.save()
+                # Si quieres que la página se recargue tras añadir la máquina:
                 form = MaquinaForm()  # Reinicia el formulario para que esté limpio después del POST
+            # Si el formulario no es válido, se pasará con los errores al template
         else:
             form = MaquinaForm()
 
