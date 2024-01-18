@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'myapp',
+    'myapp.apps.MyAppConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'DB',  # Nombre de tu base de datos
         'USER': 'root',  # Tu usuario de MariaDB
-        'PASSWORD': '12345',  # La contraseña de tu usuario de MariaDB
+        'PASSWORD': '',  # La contraseña de tu usuario de MariaDB
         'HOST': 'localhost',  # O la dirección de tu servidor de MariaDB si no es local
         'PORT': '3306',  # Puerto predeterminado de MariaDB/MySQL
     }
