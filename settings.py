@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'login_seguridad.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'root',  # Nombre de tu base de datos
+        'USER': '12345',  # Tu usuario de MariaDB
+        'PASSWORD': '',  # La contraseña de tu usuario de MariaDB
+        'HOST': 'localhost',  # O la dirección de tu servidor de MariaDB si no es local
+        'PORT': '3306',  # Puerto predeterminado de MariaDB/MySQL
     }
 }
 
@@ -125,14 +129,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # settings.py
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'BD',  # Nombre de tu base de datos
-        'USER': '',  # Tu usuario de MariaDB
-        'PASSWORD': '',  # La contraseña de tu usuario de MariaDB
-        'HOST': 'localhost',  # O la dirección de tu servidor de MariaDB si no es local
-        'PORT': '3306',  # Puerto predeterminado de MariaDB/MySQL
-    }
-}
 
