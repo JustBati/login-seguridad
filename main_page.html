@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        Usuario: <span id="username">[Nombre de Usuario]</span>
+    </div>
+    <div class="main-content">
+        <table id="machines-table">
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Número de Serie</th>
+                <th>Observaciones</th>
+            </tr>
+            <!-- Los datos de las máquinas se cargarán aquí dinámicamente -->
+        </table>
+        <button id="add-machine-button" onclick="showAddMachineForm()">Añadir Máquina</button>
+        <div id="add-machine-form" style="display:none;">
+            <!-- Formulario para añadir máquina -->
+            <form method="post">
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo"><br>
+
+                <label for="marca">Marca:</label>
+                <input type="text" id="marca" name="marca"><br>
+
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo"><br>
+
+                <label for="numero_serie">Número de Serie:</label>
+                <input type="text" id="numero_serie" name="numero_serie"><br>
+
+                <label for="observaciones">Observaciones:</label>
+                <textarea id="observaciones" name="observaciones"></textarea><br>
+
+                <input type="submit" value="Guardar Máquina">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Aquí se añadirá el código JavaScript para mostrar/ocultar el formulario
+        function showAddMachineForm() {
+            var form = document.getElementById('add-machine-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
