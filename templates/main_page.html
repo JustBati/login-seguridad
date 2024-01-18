@@ -5,9 +5,31 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        Usuario: <span id="Nombre">[Nombre de Usuario]</span>
-    </div>
+    <!-- myapp/templates/main_page.html -->
+
+    {% extends "base.html" %}
+
+    {% block content %} 
+      <div class="header">
+          Usuario: <span id="Nombre">{{ user.username }}</span>
+      </div>
+      <div class="main-content">
+          <table id="machines-table">
+              <!-- Contenido de la tabla -->
+          </table>
+          {% if form %}
+          <div id="add-machine-form">
+              <h2>Añadir Máquina</h2>
+              <form method="post">
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input type="submit" value="Guardar Máquina">
+              </form>
+          </div>
+          {% endif %}
+      </div>
+    {% endblock %}
+
     <div class="main-content">
         <table id="machines-table">
             <tr>
@@ -43,13 +65,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        // Aquí se añadirá el código JavaScript para mostrar/ocultar el formulario
-        function showAddMachineForm() {
-            var form = document.getElementById('add-machine-form');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        }
-    </script>
 </body>
 </html>
