@@ -8,43 +8,35 @@ from .models import Maquina, Prestamo
 from django.views.decorators.http import require_http_methods
 from .forms import MaquinaForm, SignUpForm 
 from django.utils import timezone
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import login
 
 
-def login_view(request):
+def login_register_view(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            Nombre = form.cleaned_data.get('Nombre')
-            Contraseña = form.cleaned_data.get('Contraseña')
-            user = authenticate(Nombre=Nombre, Contraseña=Contraseña)
-            if user is not None:
+        if 'register_form' in request.POST:
+            register_form = UserCreationForm(request.POST)
+            if register_form.is_valid():
+                user = register_form.save()
                 login(request, user)
-                # Redirige a la página principal o a donde prefieras después del inicio de sesión
-                return redirect(reverse('main_page'))
-        else:
-            # Manejar el caso de un formulario no válido
-            return render(request, 'login.html', {'form': form})
+                return redirect('main_page')
+        elif 'login_form' in request.POST:
+            login_form = AuthenticationForm(request, data=request.POST)
+            if login_form.is_valid():
+                username = login_form.cleaned_data.get('username')
+                password = login_form.cleaned_data.get('password')
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('main_page')
 
-    else:
-        form = AuthenticationForm()
-        return render(request, 'login.html', {'form': form})
-
-def register_view(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            user.refresh_from_db()  # Carga el perfil creado por la señal
-            # user.profile.birth_date = form.cleaned_data.get('birth_date') # Si tienes campos adicionales en el perfil
-            user.save()
-            login(request, user)  # Iniciar sesión del usuario
-            return redirect('main_page')  # Redirigir a la página principal
-    else:
-        form = SignUpForm()
-    return render(request, 'register.html', {'form': form})
+    register_form = UserCreationForm()
+    login_form = AuthenticationForm()
+    return render(request, 'login_register.html', {
+        'register_form': register_form,
+        'login_form': login_form
+    })
 
 
 @login_required

@@ -1,0 +1,24 @@
+<!-- templates/login_register.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login and Register Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="post" action="{% url 'login_register' %}">
+        {% csrf_token %}
+        {{ login_form.as_p }}
+        <input type="submit" name="login_form" value="Login">
+    </form>
+    
+    <h1>Register</h1>   
+    <form method="post" action="{% url 'login_register' %}">
+        {% csrf_token %}
+        {{ register_form.as_p }}
+        <input type="submit" name="register_form" value="Register">
+    </form>
+</body>
+</html>
