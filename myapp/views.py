@@ -1,15 +1,16 @@
 # myapp/views.py
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from .models import Maquina, Prestamo
 from django.views.decorators.http import require_http_methods
-from .forms import MaquinaForm
+from .forms import MaquinaForm, SignUpForm 
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth import login
 
 
 def login_view(request):
@@ -30,6 +31,20 @@ def login_view(request):
     else:
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
+
+def register_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  # Carga el perfil creado por la señal
+            # user.profile.birth_date = form.cleaned_data.get('birth_date') # Si tienes campos adicionales en el perfil
+            user.save()
+            login(request, user)  # Iniciar sesión del usuario
+            return redirect('main_page')  # Redirigir a la página principal
+    else:
+        form = SignUpForm()
+    return render(request, 'register.html', {'form': form})
 
 
 @login_required

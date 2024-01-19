@@ -3,6 +3,7 @@
 from django.contrib import admin
 from django.urls import path
 from .views import login_view
+from .views import register_view
 from . import views
 
 urlpatterns = [
@@ -13,5 +14,7 @@ urlpatterns = [
     path('get_machines/', views.get_machines, name='get_machines'),
     path('loan_machine/', views.loan_machine, name='loan_machine'),
     path('get_loans/', views.get_loans, name='get_loans'),
+    path('register/', register_view, name='register'),
+
     # ... otras URLs ...
 ]
